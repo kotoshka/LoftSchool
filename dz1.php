@@ -15,3 +15,6 @@ function show_something()
 if (1==1) {
     echo 'hi';
 }
+
+
+echo "lalalal";
