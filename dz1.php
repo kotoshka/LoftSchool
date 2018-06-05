@@ -10,7 +10,8 @@ $name = 'Анна';
 $age = '27';
 echo nl2br('Меня зовут: ' . $name . PHP_EOL);
 echo nl2br('Мне ' . $age . ' лет' . PHP_EOL);
-echo nl2br('“!|\/’”\\' . PHP_EOL);
+//echo nl2br('“!|\/’”\\' . PHP_EOL);
+echo nl2br('"!|\/\'"\\' . PHP_EOL);
 unset($age);
 
 const PICTURES = 80;
@@ -35,7 +36,7 @@ switch ($day) {
     case (1 <= $day && $day <= 5):
         echo nl2br('Это рабочий день' . PHP_EOL);
         break;
-    case ($day == 6 || $day == 7):
+    case ($day === 6 || $day === 7):
         echo nl2br('Это выходной день' . PHP_EOL);
         break;
     case (!(1 <= $day && $day <= 7)):
@@ -58,9 +59,9 @@ foreach ($cars as $brand => $carInfo) {
 $table = '<table style="border-collapse:collapse;">';
 for ($tr=0; $tr<=9; $tr++) {
     $table .= '<tr>';
-    if ($tr == 0) {
+    if ($tr === 0) {
         for ($td=0; $td<=9; $td++) {
-            if ($td == 0) {
+            if ($td === 0) {
                 $table .= '<td style="border:1px solid black;padding:25px;"></td>';
             } else {
                 $table .= '<td style="border:1px solid black;padding:25px;">' . $td . '</td>';
@@ -68,12 +69,12 @@ for ($tr=0; $tr<=9; $tr++) {
         }
     } else {
         for ($td=0; $td<=9; $td++) {
-            if ($td == 0) {
+            if ($td === 0) {
                 $table .= '<td style="border:1px solid black;padding:25px;">' . $tr . '</td>';
             } else {
-                if ($td%2 !=0 && $tr%2 !=0) {
+                if ($td%2 !== 0 && $tr%2 !== 0) {
                     $table .= '<td style="border:1px solid black;padding:25px;">[' . $td * $tr . ']</td>';
-                } elseif ($td%2 ==0 && $tr%2 ==0) {
+                } elseif ($td%2 === 0 && $tr%2 === 0) {
                     $table .= '<td style="border:1px solid black;padding:25px;">(' . $td * $tr . ')</td>';
                 } else {
                     $table .= '<td style="border:1px solid black;padding:25px;">' . $td * $tr . '</td>';
