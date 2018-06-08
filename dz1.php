@@ -13,12 +13,14 @@ echo nl2br('Мне ' . $age . ' лет' . PHP_EOL);
 //echo nl2br('“!|\/’”\\' . PHP_EOL);
 echo nl2br('"!|\/\'"\\' . PHP_EOL);
 unset($age);
+echo '<hr><br>';
 
 const PICTURES = 80;
 const FELT_PEN = 23;
 const PENCIL = 40;
 $paints = PICTURES - FELT_PEN - PENCIL;
 echo nl2br($paints . PHP_EOL);
+echo '<hr><br>';
 
 $age = rand(1, 100);
 if (18 <= $age && $age <= 65) {
@@ -30,19 +32,26 @@ if (18 <= $age && $age <= 65) {
 } else {
     echo nl2br('Неизвестный возраст”' . PHP_EOL);
 }
+echo '<hr><br>';
 
 $day = rand(1, 10);
 switch ($day) {
-    case (1 <= $day && $day <= 5):
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
         echo nl2br('Это рабочий день' . PHP_EOL);
         break;
-    case ($day === 6 || $day === 7):
+    case 6:
+    case 7:
         echo nl2br('Это выходной день' . PHP_EOL);
         break;
-    case (!(1 <= $day && $day <= 7)):
+    default:
         echo nl2br('Неизвестный день' . PHP_EOL);
         break;
 }
+echo '<hr><br>';
 
 $bmw = array ('model' => 'X5', 'speed' => 120, 'doors' => 5, 'year' => 2015);
 $toyota = array ('model' => 'X455', 'speed' => 140, 'doors' => 4, 'year' => 2067);
@@ -55,6 +64,7 @@ foreach ($cars as $brand => $carInfo) {
     }
     echo nl2br(PHP_EOL);
 }
+echo '<hr><br>';
 
 $table = '<table style="border-collapse:collapse;">';
 for ($tr=0; $tr<=9; $tr++) {
