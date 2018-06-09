@@ -111,10 +111,15 @@ function task7(string $str)
     echo nl2br($newStr . PHP_EOL);
 }
 
-function task8(string $date)
+function task8(string $str)
 {
+    $file = fopen("test.txt", "w");
+    fwrite($file, $str);
+    fclose($file);
 }
 
-function task9(string $date)
+function task9(string $fileName)
 {
+    $fileContent = file_get_contents($fileName);
+    echo nl2br($fileContent . PHP_EOL);
 }

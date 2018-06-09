@@ -40,3 +40,7 @@ echo '<hr><br>';
 task6('Карл у Клары украл Кораллы');
 task7('Две бутылки лимонада');
 echo '<hr><br>';
+
+//task6
+task8('Hello again!');
+task9('test.txt');
