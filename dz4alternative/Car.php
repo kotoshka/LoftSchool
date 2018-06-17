@@ -17,11 +17,9 @@ class Car
         } else {
             $this->turnOnBackward();
         }
-
         $this->moveOn($meters);
 // TODO запретить вызов не из Engine
 //        $this->cooling(200);
-
-        echo 'Я выключила двигатель и коробку передач<br>';
+        $this->turnOff();
     }
 }
