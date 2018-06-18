@@ -4,7 +4,6 @@ namespace Kopose\LoftSchool\dz4alternative;
 
 trait Engine
 {
-
     protected $horsePower = 5;
 
     protected function maxSpeed()
