@@ -23,7 +23,7 @@ class Car
         }
         $this->engine->moveOn($meters);
         // не вызовется
-        $this->cooling(200);
+//        $this->cooling(200);
         $this->engine->turnOff();
     }
 }
