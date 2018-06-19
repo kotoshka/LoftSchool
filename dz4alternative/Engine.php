@@ -2,17 +2,22 @@
 
 namespace Kopose\LoftSchool\dz4alternative;
 
-trait Engine
+class Engine
 {
-    protected $horsePower = 5;
+    protected $horsePower;
 
-    protected function maxSpeed()
+    public function __construct($horsePower)
+    {
+        $this->horsePower = $horsePower;
+    }
+
+    public function maxSpeed()
     {
         $maxSpeed = $this->horsePower * 2;
         return $maxSpeed;
     }
 
-    protected function moveOn($meters)
+    public function moveOn($meters)
     {
         $temp = 0;
         for ($i = 0; $i <= $meters; $i += 10) {
@@ -23,17 +28,17 @@ trait Engine
         }
     }
 
-    protected function turnOn()
+    public function turnOn()
     {
         echo 'Включили двигатель <br>';
     }
 
-    protected function turnOff()
+    public function turnOff()
     {
         echo 'Выключили двигатель <br>';
     }
 
-    public function cooling($temp)
+    private function cooling($temp)
     {
         echo 'Включили охлаждение <br>';
         $temp -= 10;

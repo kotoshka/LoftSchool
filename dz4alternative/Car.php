@@ -4,22 +4,26 @@ namespace Kopose\LoftSchool\dz4alternative;
 
 class Car
 {
-    use Engine;
+    private $engine;
+    public function __construct($engine)
+    {
+        $this->engine = $engine;
+    }
 
     public function move(int $meters, float $speed, bool $forward)
     {
-        $this->turnOn();
-        if ($speed > $this->maxSpeed()) {
-            echo 'Машина не может ехать так быстро, мы поедем со скростью ' . $this->maxSpeed() . '<br>';
+        $this->engine->turnOn();
+        if ($speed > $this->engine->maxSpeed()) {
+            echo 'Машина не может ехать так быстро, мы поедем со скростью ' . $this->engine->maxSpeed() . '<br>';
         }
         if ($forward) {
-            $this->turnOnForward($this->maxSpeed());
+            $this->turnOnForward($this->engine->maxSpeed());
         } else {
-            $this->turnOnBackward();
+            $this->engine->turnOnBackward();
         }
-        $this->moveOn($meters);
-// TODO запретить вызов не из Engine
+        $this->engine->moveOn($meters);
+        // не вызовется
 //        $this->cooling(200);
-        $this->turnOff();
+        $this->engine->turnOff();
     }
 }

@@ -10,5 +10,7 @@ require_once('TransmissionManual.php');
 require_once('Car.php');
 require_once('Toyota.php');
 
-$toyotaCar = new Toyota();
+
+$engine = new Engine(10);
+$toyotaCar = new Toyota($engine);
 $toyotaCar->move(200, 80, true);
