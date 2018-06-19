@@ -5,7 +5,7 @@ namespace Kopose\LoftSchool\dz4alternative;
 class Car
 {
     private $engine;
-    public function __construct($engine)
+    public function __construct(Engine $engine)
     {
         $this->engine = $engine;
     }
@@ -23,7 +23,7 @@ class Car
         }
         $this->engine->moveOn($meters);
         // не вызовется
-//        $this->cooling(200);
+        $this->cooling(200);
         $this->engine->turnOff();
     }
 }
