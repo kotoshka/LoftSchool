@@ -4,7 +4,7 @@ namespace Kopose\LoftSchool\dz4alternative;
 
 trait MoveBackward
 {
-    protected function turnOnBackward()
+    public function turnOnBackward()
     {
         echo 'Я включила передачу назад <br>';
     }

@@ -4,6 +4,8 @@ namespace Kopose\LoftSchool\dz4alternative;
 
 class Engine
 {
+    use MoveBackward;
+
     protected $horsePower;
 
     public function __construct($horsePower)

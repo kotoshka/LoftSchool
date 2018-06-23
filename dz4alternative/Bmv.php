@@ -2,7 +2,7 @@
 
 namespace Kopose\LoftSchool\dz4alternative;
 
-class Toyota extends Car
+class Bmv extends Car
 {
     use TransmissionManual;
 }
