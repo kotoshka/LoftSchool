@@ -60,7 +60,7 @@
                 <th>Пользователь(логин)</th>
                 <th>Имя</th>
                 <th>возраст
-                    <?php // TODO переделать на строку
+                    <?php
                     if ($_GET['order'] === 'asc') : ?>
                         <a href="/users/index/?order=desc"><span class="glyphicon glyphicon-arrow-up"></span></a>
                     <?php else : ?>
