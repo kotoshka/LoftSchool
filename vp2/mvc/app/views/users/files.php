@@ -63,7 +63,11 @@
             <?php foreach ($data['files'] as $arFile) : ?>
                 <tr>
                     <td><?= $arFile['name'] ?></td>
-                    <td><img width="100px" src="/upload/<?= $arFile['name'] ?>" alt="<?= $arFile['name'] ?>"></td>
+                    <td>
+                        <img width="100px"
+                             src="<?=(strpos($arFile['name'], 'http') !== false) ? '' : '/upload/' ?><?= $arFile['name'] ?>"
+                             alt="<?= $arFile['name'] ?>">
+                    </td>
                     <td>
                         <a href="/users/files/?delete=<?= $arFile['id'] ?>">Удалить файл пользователя</a>
                     </td>

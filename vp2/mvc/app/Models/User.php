@@ -7,12 +7,12 @@ class User extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
     protected $fillable = ['login', 'password', 'photo', 'name', 'age', 'description'];
 
-    public static function getList(int $id = 0, bool $orderAsc = true)
+    public static function getList(int $id = 0, string $order = 'desc')
     {
         if ($id > 0) {
             return User::where('id', $id)->first();
         }
-        return User::orderBy('age', $orderAsc ? 'asc' : 'desc')->get();
+        return User::orderBy('age', $order)->get();
     }
 
     public static function isExist(string $login)
@@ -81,5 +81,20 @@ class User extends \Illuminate\Database\Eloquent\Model
     public static function updateProfile(int $id, array $data)
     {
         User::where('id', $id)->update($data);
+    }
+
+    public static function fake(int $num)
+    {
+        for ($i = 0; $i < $num; $i++) {
+            $faker = \Faker\Factory::create();
+            $user = new User();
+            $user->login = $faker->name;
+            $user->name = $faker->name;
+            $user->age = $faker->numberBetween($min = 1, $max = 90);
+            $user->password = $faker->password;
+            $user->description = $faker->text;
+            $user->photo = $faker->imageUrl(200, 200, 'cats', true, 'Faker');
+            $user->save();
+        }
     }
 }

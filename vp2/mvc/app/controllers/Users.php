@@ -9,11 +9,9 @@ class Users extends Main
 {
     public function index()
     {
-//        TODO сделать через строку
-//        $order = (int)$_GET['asc'];
-        $asc = (!empty($_GET['asc'])) ? (bool)(int)$_GET['asc'] : false;
+        $order = ($_GET['order'] === 'asc') ? 'asc' : 'desc';
 
-        $data['users'] = User::getList(0, $asc);
+        $data['users'] = User::getList(0, $order);
         $data['users'] = $data['users']->toArray();
         $this->view->render('users/index', $data);
     }
@@ -40,10 +38,6 @@ class Users extends Main
 
     public function profile()
     {
-        if (!empty($_SESSION['id'])) {
-            $data = User::getList($_SESSION['id']);
-            $data = $data->toArray();
-        }
         if (!empty($_POST) || !empty($_FILES)) {
             $data['post'] = [
                 'login' => $_POST['login'],
@@ -56,6 +50,10 @@ class Users extends Main
                 $data['post']['photo'] = $fileName;
             }
             User::updateProfile($_SESSION['id'], $data['post']);
+        }
+        if (!empty($_SESSION['id'])) {
+            $data = User::getList($_SESSION['id']);
+            $data = $data->toArray();
         }
         $this->view->render('users/profile', $data);
     }
@@ -120,5 +118,14 @@ class Users extends Main
             User::remove($_REQUEST['id']);
         }
         header('Location: /users/index');
+    }
+
+    public function fake()
+    {
+        if (!empty($_GET['fake'])) {
+            $_GET['fake'] = (int)$_GET['fake'];
+            User::fake($_GET['fake']);
+        }
+        $this->view->render('users/fake');
     }
 }

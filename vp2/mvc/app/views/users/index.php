@@ -61,10 +61,10 @@
                 <th>Имя</th>
                 <th>возраст
                     <?php // TODO переделать на строку
-                    if ((int)$_GET['asc'] === 1) : ?>
-                        <a href="/users/index/?asc="><span class="glyphicon glyphicon-arrow-up"></span></a>
+                    if ($_GET['order'] === 'asc') : ?>
+                        <a href="/users/index/?order=desc"><span class="glyphicon glyphicon-arrow-up"></span></a>
                     <?php else : ?>
-                        <a href="/users/index/?asc=1"><span class="glyphicon glyphicon-arrow-down"></span></a>
+                        <a href="/users/index/?order=asc"><span class="glyphicon glyphicon-arrow-down"></span></a>
                     <?php endif; ?>
                 </th>
                 <th>описание</th>
@@ -83,7 +83,9 @@
                     <td><?= $arUser['description'] ?></td>
                     <td>
                         <?php if ($arUser['photo']) : ?>
-                            <img width="100px" src="/upload/<?= $arUser['photo'] ?>" alt="<?= $arUser['name'] ?>">
+                            <img width="100px"
+                                 src="<?=(strpos($arUser['photo'], 'http') !== false) ? '' : '/upload/' ?><?= $arUser['photo'] ?>"
+                                 alt="<?= $arUser['name'] ?>">
                         <?php else : ?>
                             Нет фото
                         <?php endif; ?>

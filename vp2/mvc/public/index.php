@@ -2,16 +2,16 @@
 session_start();
 
 define('APPLICATION_PATH', getcwd() . '/../app/');
-define('PUBLIC_PATH', getcwd());
+//define('PUBLIC_PATH', getcwd());
 require '../vendor/autoload.php';
 require_once "../app/config.php";
 
-function pre($smth)
-{
-    echo "<pre>";
-    print_r($smth);
-    echo "</pre>";
-}
+//function pre($smth)
+//{
+//    echo "<pre>";
+//    print_r($smth);
+//    echo "</pre>";
+//}
 
 $routes = explode('/', $_SERVER['REQUEST_URI']);
 
