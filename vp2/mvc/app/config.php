@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+define('ADMIN_ID', 21);
+
 $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',

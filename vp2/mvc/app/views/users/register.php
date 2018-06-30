@@ -44,7 +44,7 @@
     </div>
 </nav>
 <div style="color: red; text-align: center"><?= $data['error'] ?></div>
-
+<?print_r($_SESSION['id'])?>
 <div class="container">
     <div class="form-container">
         <?php if (empty($_SESSION['id'])) : ?>
@@ -53,6 +53,12 @@
                     <label for="inputEmail3" class="col-sm-2 control-label">Логин</label>
                     <div class="col-sm-10">
                         <input type="text" name="login" class="form-control" id="inputEmail3" placeholder="Логин">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">email</label>
+                    <div class="col-sm-10">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="email">
                     </div>
                 </div>
                 <div class="form-group">

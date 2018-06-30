@@ -2,7 +2,8 @@
 session_start();
 
 define('APPLICATION_PATH', getcwd() . '/../app/');
-//define('PUBLIC_PATH', getcwd());
+define('PUBLIC_PATH', getcwd());
+
 require '../vendor/autoload.php';
 require_once "../app/config.php";
 

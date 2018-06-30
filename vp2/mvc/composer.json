@@ -16,6 +16,7 @@
     },
     "require": {
         "illuminate/database": "^5.6",
-        "fzaninotto/faker": "^1.7"
+        "fzaninotto/faker": "^1.7",
+        "intervention/image": "^2.4"
     }
 }

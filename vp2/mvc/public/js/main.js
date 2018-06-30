@@ -25,3 +25,7 @@ $('#returnback').on('click', function(){
         zagolovok.html(str)
     });
 })
+
+$(".js-add-btn").on('click', function () {
+    $('.js-add-form').show();
+});

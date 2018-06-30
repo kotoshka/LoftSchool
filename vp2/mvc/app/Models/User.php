@@ -5,7 +5,7 @@ namespace App\Models;
 class User extends \Illuminate\Database\Eloquent\Model
 {
     public $timestamps = false;
-    protected $fillable = ['login', 'password', 'photo', 'name', 'age', 'description'];
+    protected $fillable = ['login', 'email', 'password', 'photo', 'name', 'age', 'description'];
 
     public static function getList(int $id = 0, string $order = 'desc')
     {
@@ -19,6 +19,18 @@ class User extends \Illuminate\Database\Eloquent\Model
     {
         $user = User::where(function ($db) use ($login) {
             $db->whereRaw('LOWER(login) = ?', strtolower($login));
+        })->first();
+
+        if (!empty($user)) {
+            return $user;
+        }
+        return false;
+    }
+
+    public static function checkEmail(string $email)
+    {
+        $user = User::where(function ($db) use ($email) {
+            $db->whereRaw('email = ?', $email);
         })->first();
 
         if (!empty($user)) {
@@ -41,14 +53,14 @@ class User extends \Illuminate\Database\Eloquent\Model
         return false;
     }
 
-    public static function register(string $login, string $pass)
+    public static function register(string $login, string $pass, string $email)
     {
         $hash = User::getHash($pass);
-        $newUser = User::create(['login' => $login, 'password' => $hash]);
+        $newUser = User::create(['login' => $login, 'password' => $hash, 'email' => $email]);
         return $newUser;
     }
 
-    private static function getHash(string $pass)
+    public static function getHash(string $pass)
     {
         $options = [
             'salt' => 'sredgftgyjhklj;liubyyjcrrftugyihjvjyrdytfughuki',

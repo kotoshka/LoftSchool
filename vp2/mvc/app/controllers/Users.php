@@ -16,6 +16,73 @@ class Users extends Main
         $this->view->render('users/index', $data);
     }
 
+    public function admin()
+    {
+        $data = [];
+        try {
+            // create
+            if (!empty($_POST['create'])) {
+                $data = $this->createUser();
+                $data['post'] = [
+                    'login' => $_POST['login'],
+                    'email' => $_POST['email'],
+                    'name' => $_POST['name'],
+                    'age' => $_POST['age'],
+                    'description' => $_POST['description'],
+                ];
+                if (!empty($_FILES)) {
+                    $fileName = User::uploadFile($_FILES['photo']);
+                    if (!empty($fileName)) {
+                        $data['post']['photo'] = $fileName;
+                    }
+                }
+                if (!empty($data['user']['id'])) {
+                    User::updateProfile($data['user']['id'], $data['post']);
+                }
+            }
+            // delete
+            if (!empty($_REQUEST['delete'])) {
+                User::remove($_REQUEST['delete']);
+            }
+            // update
+            if (!empty($_POST['edit'])) {
+                $data['post'] = [
+                    'login' => $_POST['login'],
+                    'email' => $_POST['email'],
+                    'name' => $_POST['name'],
+                    'age' => $_POST['age'],
+                    'description' => $_POST['description'],
+                ];
+                if (!empty($_POST['password']) && $_POST['password'] !== $_POST['confirmPass']) {
+                    throw new \Exception('Пароли не совпадают!');
+                }
+                $hash = User::getHash($_POST['password']);
+                $data['post']['password'] = $hash;
+                if (!empty($_FILES)) {
+                    $fileName = User::uploadFile($_FILES['photo']);
+                    if (!empty($fileName)) {
+                        $data['post']['photo'] = $fileName;
+                    }
+                }
+                User::updateProfile($_GET['edit'], $data['post']);
+            }
+        } catch (\Exception $e) {
+            $data['error'] = $e->getMessage();
+        }
+        if (!empty($_GET['edit'])) {
+            $data['user'] = User::getList($_GET['edit']);
+            if (empty($data['user'])) {
+                $data['error'] = 'Такого пользователя не существует!';
+            }
+            $data['user'] = $data['user']->toArray();
+        } else {
+            $order = ($_GET['order'] === 'asc') ? 'asc' : 'desc';
+            $data['users'] = User::getList(0, $order);
+            $data['users'] = $data['users']->toArray();
+        }
+        $this->view->render('users/admin', $data);
+    }
+
     public function files()
     {
         $data = [];
@@ -60,10 +127,15 @@ class Users extends Main
 
     public function register()
     {
-        $data = [];
+        $data = $this->createUser();
+        $this->view->render('users/register', $data);
+    }
+
+    public function createUser()
+    {
         try {
             if (!empty($_POST)) {
-                if (empty($_POST['password']) || empty($_POST['confirmPass']) || empty($_POST['login'])) {
+                if (empty($_POST['password']) || empty($_POST['confirmPass']) || empty($_POST['login']) || empty($_POST['email'])) {
                     throw new \Exception('Все поля должны быть заполнены!');
                 }
                 if ($_POST['password'] !== $_POST['confirmPass']) {
@@ -72,14 +144,19 @@ class Users extends Main
                 if (User::isExist($_POST['login'])) {
                     throw new \Exception('Пользователь с таким логином уже существует!');
                 }
-                $data['user'] = User::register($_POST['login'], $_POST['password']);
+                if (User::checkEmail($_POST['email'])) {
+                    throw new \Exception('Пользователь с таким email уже существует!');
+                }
+                $data['user'] = User::register($_POST['login'], $_POST['password'], $_POST['email']);
                 $data['success'] = $data['user']['login'] . ', Вы успешно зарегистрированы!';
-                $_SESSION['id'] = $data['user']['id'];
+                if (empty($_SESSION['id'])) {
+                    $_SESSION['id'] = $data['user']['id'];
+                }
             }
         } catch (\Exception $e) {
             $data['error'] = $e->getMessage();
         }
-        $this->view->render('users/register', $data);
+        return $data;
     }
 
     public function authorize()

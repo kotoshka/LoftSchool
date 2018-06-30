@@ -11,6 +11,7 @@ Capsule::schema()->dropIfExists('users');
 Capsule::schema()->create('users', function (Blueprint $table) {
     $table->increments('id');
     $table->string('name');
+    $table->string('email')->unique();
     $table->string('login');
     $table->string('password');
     $table->integer('age');
@@ -30,6 +31,7 @@ for ($i = 0; $i < 20; $i++) {
     $user = new User();
     $user->login = $faker->name;
     $user->name = $faker->name;
+    $user->email = $faker->email;
     $user->age = $faker->numberBetween($min = 1, $max = 90);
     $user->password = $faker->password;
     $user->description = $faker->text;

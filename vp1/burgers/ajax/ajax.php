@@ -1,4 +1,6 @@
 <?php
+require_once('../admin/functions.php');
+
 if ($_POST['email']) {
     $mysqli = new mysqli("localhost", "root", "", "vp1");
     $email = $_POST['email'];
@@ -47,9 +49,14 @@ if ($_POST['email']) {
         $message = '<h2>Заказ № ' . $orderId . '</h2><br>' .
             'Ваш заказ будет доставлен по адресу: ' . $address . '<br>' .
             'Содержимое заказа: DarkBeefBurger за 500 рублей - 1 шт<br>' . $thanks . '<br>';
-        // на хостинге работает (http://prntscr.com/jtrw2t)
+
+        /*на хостинге работает (http://prntscr.com/jtrw2t)
         $headers = "Content-type: text/html; charset=utf-8\r\n";
-        mail($email, 'Информация о заказе', $message, $headers);
+        mail($email, 'Информация о заказе', $message, $headers);*/
+
+        // http://prntscr.com/k14gla - работает!
+        swiftMail('Информация о заказе', $email, $message);
+
         // запишем в файл
         $message = 'Заказ № ' . $orderId . PHP_EOL .
             'Ваш заказ будет доставлен по адресу: ' . $address . PHP_EOL .
