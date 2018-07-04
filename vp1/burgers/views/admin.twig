@@ -1,0 +1,32 @@
+<h2>Список пользователей</h2>
+<table style="border-collapse: collapse">
+    {% for key, user in users %}
+        <tr>
+            {% if key == 0 %}
+                {% for k, userInfo in user %}
+                    <td style="border: 1px solid black"> {{ k }} </td>
+                {% endfor %}
+                </tr><tr>
+            {% endif %}
+            {% for userinfo in user %}
+                <td style="border: 1px solid black"> {{ userinfo }} </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+<h2>Список заказов</h2>
+<table style="border-collapse: collapse">
+    {% for key, order in orders %}
+        <tr>
+        {% if key == 0 %}
+            {% for k, orderInfo in user %}
+                <td style="border: 1px solid black"> {{ k }} </td>
+            {% endfor %}
+            </tr><tr>
+        {% endif %}
+        {% for orderinfo in order %}
+            <td style="border: 1px solid black"> {{ orderinfo }} </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
